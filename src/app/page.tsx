@@ -24,7 +24,7 @@ export default function HomePage() {
 
       setIsLoaded(true);
 
-      const handleKeyPress = (e) => {
+      const handleKeyPress = (e: KeyboardEvent) => {
         if (e.key === 'Enter' && showIntro) {
           handleEnterPortfolio();
         }
