@@ -109,7 +109,7 @@ const Hero = () => {
   return (
     <section 
       id="hero-section"
-      className="h-screen flex flex-col justify-center items-center px-6 relative overflow-hidden -mt-32"
+      className="h-screen flex flex-col justify-center items-center px-6 relative overflow-hidden"
     >
       {/* Floating elements with subtle tech colors */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -137,7 +137,7 @@ const Hero = () => {
 
       {/* Main content */}
       <div 
-        className={`text-center transition-all duration-1000 transform ${
+        className={`text-center transition-all duration-1000 transform pt-16 md:pt-0 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}
         style={{
@@ -154,14 +154,14 @@ const Hero = () => {
             transform: `translate(${mousePosition.x * (!isMobile ? 5 : 2)}px, ${mousePosition.y * (!isMobile ? 5 : 2)}px) rotate(${mousePosition.x * (!isMobile ? 0.5 : 0.2)}deg)`
           }}
         >
-          <h1 className={`text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-bold text-white drop-shadow-lg mb-2 md:mb-3 transition-all duration-1000 ${
+          <h1 className={`text-2xl sm:text-3xl md:text-7xl lg:text-8xl font-bold text-white drop-shadow-lg mb-2 md:mb-3 transition-all duration-1000 ${
             isVisible ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0'
           }`}
           style={{
             textShadow: '0 0 30px rgba(0, 212, 255, 0.3)'
           }}>
             {displayText}
-            <span className={`inline-block w-1 h-8 sm:h-10 md:h-18 lg:h-20 bg-cyan-400 ml-1 md:ml-2 ${
+            <span className={`inline-block w-0.5 h-6 sm:h-8 md:h-18 lg:h-20 bg-cyan-400 ml-1 md:ml-2 ${
               currentIndex >= fullText.length ? 'animate-pulse' : 'animate-ping'
             }`}
             style={{
@@ -170,7 +170,7 @@ const Hero = () => {
           </h1>
           
           {/* Subtle glowing effect */}
-          <div className={`absolute inset-0 text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-bold text-cyan-300 opacity-20 blur-sm transition-all duration-1000 delay-200 ${
+          <div className={`absolute inset-0 text-2xl sm:text-3xl md:text-7xl lg:text-8xl font-bold text-cyan-300 opacity-20 blur-sm transition-all duration-1000 delay-200 ${
             isVisible ? 'translate-y-0 opacity-20' : '-translate-y-20 opacity-0'
           }`}>
             {displayText}
@@ -179,12 +179,12 @@ const Hero = () => {
 
         {/* Enhanced title with tech accent */}
         <div 
-          className="h-8 sm:h-9 mb-6 md:mb-8"
+          className="h-6 sm:h-8 mb-4 md:mb-8"
           style={{
             transform: `translate(${mousePosition.x * (!isMobile ? 3 : 1)}px, ${mousePosition.y * (!isMobile ? 3 : 1)}px)`
           }}
         >
-          <p className={`text-cyan-300 text-base sm:text-lg md:text-2xl lg:text-3xl font-medium transition-all duration-1000 delay-300 ${
+          <p className={`text-cyan-300 text-sm sm:text-base md:text-2xl lg:text-3xl font-medium transition-all duration-1000 delay-300 ${
             !isTyping && isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
           }`}
           style={{
@@ -204,7 +204,7 @@ const Hero = () => {
             transform: `translate(${mousePosition.x * (!isMobile ? 4 : 1)}px, ${mousePosition.y * (!isMobile ? 4 : 1)}px)`
           }}
         >
-          <p className="text-gray-300 text-sm sm:text-base md:text-xl lg:text-2xl mb-8 md:mb-10 max-w-xs sm:max-w-lg md:max-w-3xl mx-auto leading-relaxed px-4 md:px-0"
+          <p className="text-gray-300 text-xs sm:text-sm md:text-xl lg:text-2xl mb-6 md:mb-10 max-w-xs sm:max-w-lg md:max-w-3xl mx-auto leading-relaxed px-2 md:px-0"
              style={{
                textShadow: '0 0 10px rgba(255, 255, 255, 0.1)'
              }}>
@@ -214,12 +214,12 @@ const Hero = () => {
         </div>
 
         {/* Experience Cards with minimal tech enhancement */}
-        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-sm sm:max-w-2xl md:max-w-4xl mx-auto px-4 md:px-0 transition-all duration-1000 delay-700 ${
+        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 max-w-xs sm:max-w-2xl md:max-w-4xl mx-auto px-2 md:px-0 transition-all duration-1000 delay-700 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
           {/* Years of Experience */}
           <div 
-            className={`relative bg-gradient-to-br from-blue-900/30 to-purple-900/30 backdrop-blur-sm border border-cyan-500/30 rounded-xl md:rounded-2xl p-4 md:p-6 hover:border-cyan-400/50 transition-all duration-1000 delay-800 hover:shadow-lg ${
+            className={`relative bg-gradient-to-br from-blue-900/30 to-purple-900/30 backdrop-blur-sm border border-cyan-500/30 rounded-lg md:rounded-2xl p-3 md:p-6 hover:border-cyan-400/50 transition-all duration-1000 delay-800 hover:shadow-lg ${
               isVisible ? '-translate-x-0 opacity-100' : '-translate-x-20 opacity-0'
             }`}
             style={{
@@ -229,16 +229,16 @@ const Hero = () => {
             }}
           >
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-cyan-400 mb-1 md:mb-2"
+              <div className="text-xl sm:text-2xl md:text-4xl font-bold text-cyan-400 mb-1 md:mb-2"
                    style={{ textShadow: '0 0 15px rgba(0, 212, 255, 0.5)' }}>2+</div>
-              <div className="text-white font-semibold mb-0.5 md:mb-1 text-sm md:text-base">Years</div>
+              <div className="text-white font-semibold mb-0.5 md:mb-1 text-xs md:text-base">Years</div>
               <div className="text-gray-400 text-xs md:text-sm">Experience</div>
             </div>
           </div>
 
           {/* Projects Completed */}
           <div 
-            className={`relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-indigo-500/30 rounded-xl md:rounded-2xl p-4 md:p-6 hover:border-indigo-400/50 transition-all duration-1000 delay-900 hover:shadow-lg ${
+            className={`relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-indigo-500/30 rounded-lg md:rounded-2xl p-3 md:p-6 hover:border-indigo-400/50 transition-all duration-1000 delay-900 hover:shadow-lg ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
             }`}
             style={{
@@ -248,16 +248,16 @@ const Hero = () => {
             }}
           >
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-indigo-400 mb-1 md:mb-2"
+              <div className="text-xl sm:text-2xl md:text-4xl font-bold text-indigo-400 mb-1 md:mb-2"
                    style={{ textShadow: '0 0 15px rgba(99, 102, 241, 0.5)' }}>15+</div>
-              <div className="text-white font-semibold mb-0.5 md:mb-1 text-sm md:text-base">Projects</div>
+              <div className="text-white font-semibold mb-0.5 md:mb-1 text-xs md:text-base">Projects</div>
               <div className="text-gray-400 text-xs md:text-sm">Completed</div>
             </div>
           </div>
 
           {/* Technologies */}
           <div 
-            className={`relative bg-gradient-to-br from-emerald-900/30 to-blue-900/30 backdrop-blur-sm border border-emerald-500/30 rounded-xl md:rounded-2xl p-4 md:p-6 hover:border-emerald-400/50 transition-all duration-1000 delay-1000 hover:shadow-lg sm:col-span-2 md:col-span-1 ${
+            className={`relative bg-gradient-to-br from-emerald-900/30 to-blue-900/30 backdrop-blur-sm border border-emerald-500/30 rounded-lg md:rounded-2xl p-3 md:p-6 hover:border-emerald-400/50 transition-all duration-1000 delay-1000 hover:shadow-lg sm:col-span-2 md:col-span-1 ${
               isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'
             }`}
             style={{
@@ -267,9 +267,9 @@ const Hero = () => {
             }}
           >
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-400 mb-1 md:mb-2"
+              <div className="text-xl sm:text-2xl md:text-4xl font-bold text-emerald-400 mb-1 md:mb-2"
                    style={{ textShadow: '0 0 15px rgba(16, 185, 129, 0.5)' }}>10+</div>
-              <div className="text-white font-semibold mb-0.5 md:mb-1 text-sm md:text-base">Technologies</div>
+              <div className="text-white font-semibold mb-0.5 md:mb-1 text-xs md:text-base">Technologies</div>
               <div className="text-gray-400 text-xs md:text-sm">Mastered</div>
             </div>
           </div>
@@ -277,7 +277,7 @@ const Hero = () => {
 
         {/* Action Area with minimal enhancement */}
         <div 
-          className={`flex flex-col items-center gap-4 md:gap-6 mt-6 md:mt-8 px-4 md:px-0 transition-all duration-1000 delay-1100 ${
+          className={`flex flex-col items-center gap-3 md:gap-6 mt-4 md:mt-8 px-2 md:px-0 transition-all duration-1000 delay-1100 ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-15 opacity-0'
           }`}
           style={{
@@ -365,11 +365,11 @@ const Hero = () => {
 
       {/* Scroll indicator with subtle enhancement */}
       <div 
-        className={`absolute bottom-4 md:bottom-8 left-1/2 transition-all duration-1000 delay-1200 ${
+        className={`absolute bottom-6 md:bottom-8 left-1/2 transition-all duration-1000 delay-1200 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}
         style={{
-          transform: `translate(${isMobile ? '-50%' : `calc(-50% + ${mousePosition.x * 2}px)`}, ${isMobile ? '0px' : `${mousePosition.y * 2}px`})`
+          transform: `translate(-50%, ${isMobile ? '0px' : `${mousePosition.y * 2}px`})`
         }}
       >
         <div className="flex flex-col items-center text-gray-400">
