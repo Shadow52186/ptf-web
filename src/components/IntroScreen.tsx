@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
 
-const IntroScreen = ({ onEnter }) => {
+const IntroScreen = ({ onEnter }: { onEnter: () => void }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [textIndex, setTextIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
@@ -29,24 +29,24 @@ const IntroScreen = ({ onEnter }) => {
 
   // Mouse tracking for parallax effect
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 2;
       const y = (e.clientY / window.innerHeight - 0.5) * 2;
       setMousePosition({ x, y });
     };
 
     // Prevent scroll on wheel event
-    const handleWheel = (e) => {
+    const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
     };
 
     // Prevent scroll on touch events
-    const handleTouchMove = (e) => {
+    const handleTouchMove = (e: TouchEvent) => {
       e.preventDefault();
     };
 
     // Prevent scroll on keyboard events
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(e.key)) {
         e.preventDefault();
       }

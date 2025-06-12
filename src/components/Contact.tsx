@@ -34,9 +34,9 @@ const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
-  const [focusedField, setFocusedField] = useState(null);
-  const sectionRef = useRef(null);
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+  const [focusedField, setFocusedField] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   // ✅ Fix: Intersection Observer with proper cleanup
   useEffect(() => {
@@ -64,7 +64,7 @@ const Contact = () => {
 
   // Mouse tracking for parallax effect
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect();
         const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
@@ -85,11 +85,11 @@ const Contact = () => {
     };
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
