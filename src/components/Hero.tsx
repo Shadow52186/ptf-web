@@ -363,20 +363,20 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll indicator with subtle enhancement */}
+      {/* Scroll indicator with subtle enhancement - Hidden on mobile */}
       <div 
-        className={`absolute bottom-6 md:bottom-8 left-1/2 transition-all duration-1000 delay-1200 ${
+        className={`absolute bottom-8 left-1/2 transition-all duration-1000 delay-1200 hidden md:block ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}
         style={{
-          transform: `translate(-50%, ${isMobile ? '0px' : `${mousePosition.y * 2}px`})`
+          transform: `translate(-50%, ${mousePosition.y * 2}px)`
         }}
       >
         <div className="flex flex-col items-center text-gray-400">
           <span className="text-xs md:text-sm mb-1 md:mb-2">Scroll down</span>
-          <div className="w-5 h-8 md:w-6 md:h-10 border-2 border-cyan-400/50 rounded-full flex justify-center"
+          <div className="w-4 h-6 md:w-6 md:h-10 border-2 border-cyan-400/50 rounded-full flex justify-center"
                style={{ boxShadow: '0 0 10px rgba(0, 212, 255, 0.2)' }}>
-            <div className="w-0.5 h-2 md:w-1 md:h-3 bg-cyan-400 rounded-full mt-1 md:mt-2 animate-bounce"
+            <div className="w-0.5 h-1.5 md:w-1 md:h-3 bg-cyan-400 rounded-full mt-1 md:mt-2 animate-bounce"
                  style={{ boxShadow: '0 0 8px #00d4ff' }} />
           </div>
         </div>
