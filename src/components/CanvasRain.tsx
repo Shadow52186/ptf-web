@@ -2,14 +2,20 @@
 import React, { useEffect, useRef } from "react";
 
 const CanvasRain = () => {
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    // ✅ Fix: Add null check for canvas
+    if (!canvas) return;
+    
     const ctx = canvas.getContext('2d');
+    // ✅ Fix: Add null check for context
+    if (!ctx) return;
     
     // ตั้งค่าขนาด canvas
     const resizeCanvas = () => {
+      if (!canvas) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
@@ -18,13 +24,20 @@ const CanvasRain = () => {
     window.addEventListener('resize', resizeCanvas);
 
     // สร้างแสงและพื้นหลัง
-    const gridDots = [];
+    const gridDots: Array<{
+      x: number;
+      y: number;
+      opacity: number;
+      pulseSpeed: number;
+      pulsePhase: number;
+    }> = [];
     let mouseX = 0;
     let mouseY = 0;
     let mouseVisible = false;
     
     // Track mouse movement
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
       mouseX = e.clientX - rect.left;
       mouseY = e.clientY - rect.top;
@@ -55,6 +68,8 @@ const CanvasRain = () => {
     }
 
     const animate = () => {
+      if (!canvas || !ctx) return;
+      
       // พื้นหลังสีดำหลัก
       ctx.fillStyle = '#0a0a0f';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -171,8 +186,10 @@ const CanvasRain = () => {
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      canvas.removeEventListener('mousemove', handleMouseMove);
-      canvas.removeEventListener('mouseleave', handleMouseLeave);
+      if (canvas) {
+        canvas.removeEventListener('mousemove', handleMouseMove);
+        canvas.removeEventListener('mouseleave', handleMouseLeave);
+      }
     };
   }, []);
 
