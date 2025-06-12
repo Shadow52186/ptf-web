@@ -42,7 +42,7 @@ const projects = [
     type: "game",
     tech: ["Roblox Studio", "Lua", "AI", "Game Design"],
     gradient: "from-purple-500 to-pink-500",
-    status: "Published"
+    status: "Not Published"
   },
   {
     title: "AI Speech Transcriber",
@@ -51,7 +51,7 @@ const projects = [
     type: "github",
     tech: ["Python", "Whisper", "FastAPI", "React"],
     gradient: "from-green-500 to-emerald-500",
-    status: "Open Source"
+    status: "In Development"
   },
 ];
 
@@ -61,7 +61,7 @@ const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState(null);
   const sectionRef = useRef(null);
 
-  // Intersection Observer for scroll animations
+  // ✅ Fix: Intersection Observer with proper cleanup
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -72,13 +72,15 @@ const Projects = () => {
       { threshold: 0.2 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current; // Copy ref to variable
+
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -180,7 +182,7 @@ const Projects = () => {
         <p className={`text-gray-400 mb-12 max-w-2xl mx-auto text-lg transition-all duration-1000 delay-400 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
-          Explore some of the projects I've built and contributed to, showcasing my technical skills and creativity.
+          Explore some of the projects I&apos;ve built and contributed to, showcasing my technical skills and creativity.
         </p>
       </div>
 

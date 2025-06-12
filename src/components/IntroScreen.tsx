@@ -1,23 +1,22 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 const IntroScreen = ({ onEnter }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [textIndex, setTextIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
-  const [showButton, setShowButton] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  const introTexts = [
+  // ✅ Fix: Move introTexts to useMemo to prevent dependency warnings
+  const introTexts = useMemo(() => [
     "Hello! I'm Tinnapat Saelee",
     "17 years old, Grade 12 student",
     "Full-Stack Developer",
     "Welcome to my Portfolio"
-  ];
+  ], []);
 
   useEffect(() => {
     setIsVisible(true);
-    setShowButton(true); // แสดงปุ่มทันที
     
     // Disable scrolling
     document.body.style.overflow = 'hidden';
@@ -66,6 +65,7 @@ const IntroScreen = ({ onEnter }) => {
     };
   }, []);
 
+  // ✅ Fix: Add introTexts to dependency array
   useEffect(() => {
     if (textIndex < introTexts.length) {
       const currentText = introTexts[textIndex];
@@ -88,7 +88,7 @@ const IntroScreen = ({ onEnter }) => {
       
       setTimeout(typeText, 300);
     }
-  }, [textIndex]);
+  }, [textIndex, introTexts]);
 
   return (
     <div className={`fixed inset-0 z-50 bg-black flex items-center justify-center transition-all duration-1000 relative w-screen h-screen ${

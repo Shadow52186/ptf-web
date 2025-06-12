@@ -95,7 +95,7 @@ const Features = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const sectionRef = useRef(null);
 
-  // Intersection Observer for scroll animations
+  // ✅ Fix: Intersection Observer with proper cleanup
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -106,13 +106,15 @@ const Features = () => {
       { threshold: 0.2 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current; // Copy ref to variable
+
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -191,7 +193,7 @@ const Features = () => {
         <p className={`text-gray-400 mb-12 max-w-2xl mx-auto text-lg transition-all duration-1000 delay-400 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
-          Here's what I bring to every project I work on, combining creativity with technical expertise.
+          Here&apos;s what I bring to every project I work on, combining creativity with technical expertise.
         </p>
       </div>
 

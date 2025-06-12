@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 const Hero = () => {
   const [displayText, setDisplayText] = useState("");
@@ -10,12 +10,15 @@ const Hero = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   const fullText = "TINNAPAT SAELEE";
-  const titles = [
+  
+  // ✅ Fix: Move titles to useMemo to prevent dependency warnings
+  const titles = useMemo(() => [
     "Full-Stack Developer",
     "UI/UX Designer", 
     "Creative Coder",
     "Problem Solver"
-  ];
+  ], []);
+  
   const [currentTitle, setCurrentTitle] = useState(0);
   const [titleText, setTitleText] = useState("");
   const [titleIndex, setTitleIndex] = useState(0);
@@ -33,7 +36,7 @@ const Hero = () => {
     }
   }, [currentIndex, fullText]);
 
-  // Typing animation for titles
+  // ✅ Fix: Add titles to dependency array
   useEffect(() => {
     if (!isTyping) {
       const currentTitleText = titles[currentTitle];
@@ -56,7 +59,7 @@ const Hero = () => {
     }
   }, [titleIndex, currentTitle, titles, isTyping]);
 
-  // Intersection Observer for scroll animations
+  // ✅ Fix: Intersection Observer with proper cleanup
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -68,13 +71,15 @@ const Hero = () => {
     );
 
     const heroElement = document.getElementById('hero-section');
-    if (heroElement) {
-      observer.observe(heroElement);
+    const currentElement = heroElement; // Copy ref to variable
+    
+    if (currentElement) {
+      observer.observe(currentElement);
     }
 
     return () => {
-      if (heroElement) {
-        observer.unobserve(heroElement);
+      if (currentElement) {
+        observer.unobserve(currentElement);
       }
     };
   }, []);
@@ -204,7 +209,7 @@ const Hero = () => {
                textShadow: '0 0 10px rgba(255, 255, 255, 0.1)'
              }}>
             Crafting digital experiences with modern technologies and creative solutions. 
-            Let's build something <span className="text-cyan-300 font-semibold">amazing</span> together.
+            Let&apos;s build something <span className="text-cyan-300 font-semibold">amazing</span> together.
           </p>
         </div>
 

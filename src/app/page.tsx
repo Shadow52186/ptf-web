@@ -13,32 +13,32 @@ export default function HomePage() {
   const [showIntro, setShowIntro] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // ✅ Fix: Add showIntro to dependency array
   useEffect(() => {
-  if (typeof window !== 'undefined') {
-    const hasSeenIntro = sessionStorage.getItem("hasSeenIntro");
+    if (typeof window !== 'undefined') {
+      const hasSeenIntro = sessionStorage.getItem("hasSeenIntro");
 
-    if (hasSeenIntro === "true") {
-      setShowIntro(false);
-    }
-
-    setIsLoaded(true);
-
-    const handleKeyPress = (e) => {
-      if (e.key === 'Enter' && showIntro) {
-        handleEnterPortfolio();
+      if (hasSeenIntro === "true") {
+        setShowIntro(false);
       }
-    };
 
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }
-}, []);
+      setIsLoaded(true);
 
+      const handleKeyPress = (e) => {
+        if (e.key === 'Enter' && showIntro) {
+          handleEnterPortfolio();
+        }
+      };
+
+      window.addEventListener('keydown', handleKeyPress);
+      return () => window.removeEventListener('keydown', handleKeyPress);
+    }
+  }, [showIntro]); // Add showIntro dependency
 
   const handleEnterPortfolio = () => {
-  sessionStorage.setItem("hasSeenIntro", "true");
-  setShowIntro(false);
-};
+    sessionStorage.setItem("hasSeenIntro", "true");
+    setShowIntro(false);
+  };
 
   // Loading state
   if (!isLoaded) {

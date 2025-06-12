@@ -38,7 +38,7 @@ const Contact = () => {
   const [focusedField, setFocusedField] = useState(null);
   const sectionRef = useRef(null);
 
-  // Intersection Observer for scroll animations
+  // ✅ Fix: Intersection Observer with proper cleanup
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -49,13 +49,15 @@ const Contact = () => {
       { threshold: 0.2 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current; // Copy ref to variable
+
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -206,14 +208,14 @@ const Contact = () => {
         <h3 className={`text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 transition-all duration-1000 delay-200 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
-          Let's Work 
+          Let&apos;s Work 
           <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"> Together</span>
         </h3>
         
         <p className={`text-gray-400 mb-12 max-w-2xl mx-auto text-lg transition-all duration-1000 delay-400 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
-          Have a project in mind? Let's discuss how we can bring your ideas to life.
+          Have a project in mind? Let&apos;s discuss how we can bring your ideas to life.
         </p>
       </div>
 
@@ -236,7 +238,7 @@ const Contact = () => {
               {/* Success/Error Messages */}
               {submitStatus === 'success' && (
                 <div className="mb-4 p-4 bg-green-500/20 border border-green-500/30 rounded-xl text-green-400 text-center animate-fadeIn">
-                  ✅ Message sent successfully! I'll get back to you soon.
+                  ✅ Message sent successfully! I&apos;ll get back to you soon.
                 </div>
               )}
               
@@ -360,7 +362,7 @@ const Contact = () => {
             <div className="text-left mb-8">
               <h4 className="text-2xl font-bold text-white mb-4">Get in Touch</h4>
               <p className="text-gray-400 leading-relaxed">
-                Ready to start your next project? Drop me a message and let's discuss how I can help bring your vision to life.
+                Ready to start your next project? Drop me a message and let&apos;s discuss how I can help bring your vision to life.
               </p>
             </div>
 
@@ -397,9 +399,6 @@ const Contact = () => {
                 </div>
               ))}
             </div>
-
-            
-           
           </div>
         </div>
       </div>
